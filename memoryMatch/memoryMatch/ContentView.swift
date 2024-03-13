@@ -11,44 +11,31 @@ struct ContentView: View {
     
     var body: some View {
             NavigationView{
-                ZStack {
+                ZStack{
                     Image("StartViewBackground")
-                    VStack{
+                    VStack(spacing: 300){
                         Text("EmojiMatch")
                             .padding()
-                            .background(.green)
-                       
+                            .background(.orange)
+                            .font(Font.custom("MadimiOne-Regular", size: 45))
+                            .foregroundColor(.white)
+                        
+                        
                         NavigationLink(destination: gameView()) {
                             Text("Start")
-                                .padding()
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 22)
                                 .background(.blue)
                                 .foregroundColor(.white)
+                                .font(Font.custom("MadimiOne-Regular", size: 45))
+                                .cornerRadius(8)
                         }
                     }
+                }
             }
         }
     }
-}
 
-struct GameView: View{
-    @State var cardsFlipped: [Bool] = Array(repeating: false, count: 16)
-
-    @State var emojis = ["😀", "😀" ,"😁", "😁", "😂", "😂", "🤣", "🤣", "😃", "😃", "😄", "😄",]
-
-    @State private var pickOne: Int = -1
-
-    @State private var pickTwo: Int = -1
-
-    @State private var score: Int = 0
-
-    @State private var gameFinished: Bool = false
-    
-    var body: some View{
-        VStack{
-            
-        }
-    }
-}
 #Preview {
     ContentView()
 }
