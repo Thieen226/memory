@@ -11,15 +11,18 @@ struct finishView: View {
     var body: some View {
         ZStack{
             Image("gameViewBackground")
-                .resizable()
-                .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .resizable() //resize the img to fit its container
+                .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/) //stretch the img to fill the available space
+                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/) //take all the edges of the screen and safe area /
             VStack{
+                Text("🎉")
+                    .font(.system(size: 100))
+                    .padding()
                 Text("Great Job!")
-                    .font(Font.custom("MadimiOne-Regular", size: 45))
+                    .font(Font.custom("Shojumaru-Regular", size: 45))
                     .foregroundColor(.black)
                     .cornerRadius(6)
-                NavigationLink(destination: ContentView()) {
+                NavigationLink(destination: ContentView()) { //go back to ContentView when the user wants to play again
                     Text("Play Again")
                         .font(Font.custom("MadimiOne-Regular", size: 45))
                         .foregroundColor(.white)
@@ -29,7 +32,7 @@ struct finishView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true) //hide back button
     }
 }
 

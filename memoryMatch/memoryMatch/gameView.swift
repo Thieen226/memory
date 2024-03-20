@@ -25,17 +25,18 @@ struct gameView: View {
         NavigationView{
             ZStack{
                 Image("gameViewBackground")
-                    .resizable()
-                    .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                    .resizable() //resize the img to fit its container
+                    .aspectRatio(contentMode: .fill) //stretch the img to fill the available space
+                    .edgesIgnoringSafeArea(.all) //take all the edges of the screen and safe area
                 VStack{
                     Text("Current Score: \(score)")
                         .padding()
                         .font(Font.custom("MadimiOne-Regular", size:
                                             45))
-                    LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(emojis.shuffled().indices, id: \.self){ item in if cardsFlipped[item]{ //if the card is flipped, display the emoji of the card
-                            Text(emojis[item])
+                    LazyVGrid(columns: columns, spacing: 10) { //adding columns and spacing between them
+                        ForEach(emojis.shuffled().indices, id: \.self){ item in //create each card
+                            if cardsFlipped[item]{ //check if the card is flipped
+                            Text(emojis[item]) //display the emoji on the card
                                 .font(.system(size: 40))
                                 .frame(width: 90, height: 90)
                                 .cornerRadius(6)
@@ -46,9 +47,9 @@ struct gameView: View {
                                     .frame(width: 90, height: 90)
                                     .background(.blue)
                                     .cornerRadius(6)
-                                    .onTapGesture { //if the card is clicked, change the repeating value to display the emoji
+                                    .onTapGesture { //if the card is clicked, do the following
                                         if pickOne == -1 || pickTwo == -1{ //only allow flipping card when pickOne or pickTwo is -1
-                                            cardsFlipped[item].toggle()
+                                            cardsFlipped[item].toggle() //change its value to true
                                             if pickOne == -1{ //if no card has not chosen
                                                 pickOne = item //assign item index to make it as first pick
                                             }
@@ -61,9 +62,9 @@ struct gameView: View {
                             }
                         }
                     }
-                    if score == 6{ 
-                        HStack{
-                            NavigationLink(destination: finishView()) {
+                    if score == 6{ //if score is 6, meaning the game is done
+                        HStack{ //make the following elements horizontally
+                            NavigationLink(destination: finishView()) { //go to finishView when Next is clicked
                                 Text("Next")
                                     .font(Font.custom("MadimiOne-Regular", size: 45))
                                     .foregroundColor(.white)
@@ -71,7 +72,8 @@ struct gameView: View {
                                     .background(.blue)
                                     .cornerRadius(6)
                             }
-                            NavigationLink(destination: gameView()) {
+                            NavigationLink(destination: gameView()) { //go back to gameView when Retry is clicked
+                                //the gameView will reset to a new game
                                 Text("Retry")
                                     .font(Font.custom("MadimiOne-Regular", size: 45))
                                     .foregroundColor(.white)
@@ -80,12 +82,12 @@ struct gameView: View {
                                     .cornerRadius(6)
                             }
                         }
-                        .padding()
+                        .padding() //add padding between the cards and Next and Retry texts
                     }
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true) //hide back button
     }
     func checkCards(index : Int){
         //if two cards flipped
